@@ -1,4 +1,4 @@
-### Hang on, not done yet ... 98% in, tracking endpoint is failing (documentation not clear enough)
+### Tracking endpoint is failing (documentation not clear enough), but i have provided mock data model for tracking feature
 
 ## npm install
 
