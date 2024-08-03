@@ -1,4 +1,4 @@
-### Hang on, not done yet ... 92% in
+### Hang on, not done yet ... 98% in, tracking endpoint is failing (documentation not clear enough)
 
 ## npm install
 

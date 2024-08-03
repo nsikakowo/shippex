@@ -32,5 +32,8 @@
 .shadowDrop {
   box-shadow: 0px 1px 2px 0px #00000022;
 }
+.shadowDropError {
+  box-shadow: 0px 1px 2px 4px #e82d2d27;
+}
 
 

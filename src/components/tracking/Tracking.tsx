@@ -32,20 +32,25 @@ const Tracking: React.FC = () => {
   const [awbId, setAwbId] = useState('');
   const [shipmentDetails, setShipmentDetails] =
     useState<ShipmentDetails | null>(null);
+  const [emptyAwb, setemptyAwb] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [connectionlost, setconnectionlost] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
+  const [showNotice, setShowNotice] = useState(false);
 
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
       setconnectionlost(false);
+      setShowNotice(true);
+      setTimeout(() => setShowNotice(false), 3000);
     };
 
     const handleOffline = () => {
       setIsOnline(false);
       setconnectionlost(true);
+      setShowNotice(true);
     };
 
     window.addEventListener('online', handleOnline);
@@ -70,6 +75,11 @@ const Tracking: React.FC = () => {
   };
 
   const handleTrackClick = async () => {
+    if (!awbId) {
+      setemptyAwb(true);
+      return;
+    }
+
     setLoading(true);
     setError('');
     try {
@@ -136,15 +146,26 @@ const Tracking: React.FC = () => {
 
   return (
     <div className="flex flex-col w-full px-[48px] h-screen">
-      <div className="w-full bg-secondary mt-[48px] rounded-lg h-[110px] flex items-center justify-center ">
-        <input
-          type="text"
-          value={awbId}
-          onChange={handleInputChange}
-          placeholder="Enter AWB ID"
-          className="w-[600px] mr-6 px-4 h-[46px] py-2 border border-borderColor  shadowDrop
-          rounded focus:outline-none focus:ring-2 focus:ring-primary"
-        />
+      <div className="w-full bg-secondary mt-[48px] rounded-lg h-[110px] min-h-[110px] flex pt-6 justify-center ">
+        <div className="flex flex-col">
+          <input
+            type="text"
+            value={awbId}
+            onChange={handleInputChange}
+            placeholder="Enter AWB ID"
+            className={`w-[600px] mr-6 px-4 h-[46px] py-2 border ${
+              emptyAwb
+                ? 'border-red-500 shadowDropError '
+                : 'border-borderColor  shadowDrop'
+            }  
+          rounded focus:outline-none focus:ring-2 focus:ring-primary`}
+          />
+          {emptyAwb && (
+            <p className="text-red-500 text-sm font-medium mt-2">
+              Please enter a valid AWB
+            </p>
+          )}
+        </div>
         <button
           onClick={handleTrackClick}
           disabled={loading}
@@ -158,6 +179,7 @@ const Tracking: React.FC = () => {
           Track
         </button>
       </div>
+
       <div className="h-full text-gray-500">
         {loading ? (
           <div className="flex h-full justify-center items-center">
