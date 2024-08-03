@@ -4,6 +4,6 @@
 
 ## npm start
 
-# Tools Used
+# Tools Used:
 
 ## React-hook-form, react-icons, tailwindcss, axios, typescript
