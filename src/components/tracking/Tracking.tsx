@@ -162,7 +162,7 @@ const Tracking: React.FC = () => {
           />
           {emptyAwb && (
             <p className="text-red-500 text-sm font-medium mt-2">
-              Please enter a valid AWB
+              Please enter a valid AWB now
             </p>
           )}
         </div>
